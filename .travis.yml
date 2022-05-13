@@ -1,3 +1,7 @@
+# test run #
+os: linux  #
+############
+
 jobs:
   include:
     - stage: test
