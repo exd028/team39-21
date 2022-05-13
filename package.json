@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@react-google-maps/api": "^2.10.2",
+    "emailjs-com": "^3.2.0"
+  },
+  "devDependencies": {
+    "html-loader": "^3.1.0"
+  }
+}

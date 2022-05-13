@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  backend:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - static_volume:/app/website/django_static
+    ports:
+      - 8000:8000
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=foo
+      - DATABASE_ENGINE=django.db.backends.postgresql
+      - DATABASE_NAME=defaultdb
+      - DATABASE_USER=doadmin
+      - DATABASE_PASSWORD=AVNS_Nhupv_jtHL4DzCW
+      - DATABASE_HOST=db-postgresql-venture-do-user-10969953-0.b.db.ondigitalocean.com
+      - DB_PORT=25060
+      - DATABASE=postgres
+    depends_on:
+      - db
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=doadmin
+      - POSTGRES_PASSWORD=AVNS_Nhupv_jtHL4DzCW
+      - POSTGRES_DB=defaultdb
+
+volumes:
+  postgres_data:
+  static_volume: {}
