@@ -16,9 +16,8 @@ jobs:
         - cd frontend
       install:
         - npm ci
-        - npm run build
       script:
-        - npm run test
+        - npm run build
     - stage: deploy
       if: branch = production
       language: node_js
