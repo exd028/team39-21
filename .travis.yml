@@ -11,7 +11,7 @@ jobs:
     - stage: test2
       language: node_js
       node_js:
-        - '10'
+        - '14'
       before_install:
         - cd frontend
       install:
@@ -23,7 +23,7 @@ jobs:
       if: branch = production
       language: node_js
       node_js:
-        - '10'
+        - '14'
       before_script:
         - openssl aes-256-cbc -K $encrypted_something_key -iv $encrypted_something_iv -in deploy/deploy_key.enc -out deploy/deploy_key -d
       script: bash deploy/deploy.sh
