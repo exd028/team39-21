@@ -24,6 +24,8 @@ jobs:
       language: node_js
       node_js:
         - '10'
+      before_script:
+        - openssl aes-256-cbc -K $encrypted_something_key -iv $encrypted_something_iv -in deploy/deploy_key.enc -out deploy/deploy_key -d
       script: bash deploy/deploy.sh
 notifications:
   email: false
