@@ -1,9 +1,7 @@
-ssh -o StrictHostKeyChecking=no root@$DIGITAL_OCEAN_IP_ADDRESS << 'ENDSSH'
-  cd /app
-  export $(cat .env | xargs)
-  docker login -u dop_v1_d89a3778b31857fedf98bf63e13360882f79aa670fe4ffddb45194784b54b633 -p dop_v1_d89a3778b31857fedf98bf63e13360882f79aa670fe4ffddb45194784b54b633 registry.digitalocean.com/venture
-  docker pull $IMAGE:web
-  docker pull $IMAGE:nginx
-  docker-compose -f docker-compose.prod.yml up -d
-ENDSSH
-
+#!/bin/bash
+# Change permissions to something that SSH accepts
+chmod 600 deploy/deploy_key;
+# Send the commit hash env variable over ssh to know which commit to checkout to
+export LC_COMMIT_HASH="$TRAVIS_COMMIT"
+# Pipe the update script over SSH to the production server
+cat deploy/update_app.sh | ssh -o StrictHostKeyChecking=no -o BatchMode=yes -o SendEnv=LC_COMMIT_HASH -i deploy/deploy_key "venture@venture.bham.team"
